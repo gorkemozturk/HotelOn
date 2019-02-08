@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col">
+    <div class="card bg-light rounded-0">
+      <div class="card-header text-center rounded-0">
+        <div class="row align-items-center">
+          <div class="col text-left">ROOM TYPES</div>
+          <div class="col text-right">
+              <div class="btn btn-primary btn-sm rounded-0" (click)="openTypeDialog()">Create</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body rounded-0 p-0">
+        <table class="table table-striped table-borderless">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Tax</th>
+              <th scope="col">Created at</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let type of roomService.roomTypes">
+              <td class="align-middle">{{ type.name }}</td>
+              <td class="align-middle">{{ type.price | currency }}</td>
+              <td class="align-middle">{{ type.tax }}%</td>
+              <td class="align-middle">{{ type.createdAt | date }}</td>
+              <td class="text-right">
+                <i style="cursor: pointer" (click)="onTypeDelete(type.id)" class="text-danger far fa-trash-alt"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer rounded-0 text-center text-secondary">
+        Total Room Types: {{ roomService.roomTypes?.length }}
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card bg-light rounded-0">
+      <div class="card-header text-center rounded-0">
+        <div class="row align-items-center">
+          <div class="col text-left">ROOMS</div>
+          <div class="col text-right">
+              <div class="btn btn-primary btn-sm rounded-0" (click)="openRoomDialog()">Create</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body rounded-0 p-0">
+        <table class="table table-striped table-borderless">
+          <thead>
+            <tr>
+              <th scope="col">Number</th>
+              <th scope="col">Type</th>
+              <th scope="col">Status</th>
+              <th scope="col">Created at</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let room of roomService.rooms">
+              <td class="align-middle">{{ room.roomNumber }}</td>
+              <td class="align-middle">{{ room.roomType.name }}</td>
+              <td class="align-middle">
+                <div class="badge badge-primary rounded-0" *ngIf="room.isAvailable">Available</div>
+                <div class="badge badge-warning rounded-0" *ngIf="!room.isAvailable">Unavailable</div>
+              </td>
+              <td class="align-middle">{{ room.createdAt | date }}</td>
+              <td class="text-right">
+                <i style="cursor: pointer" (click)="onRoomDelete(room.id)" class="text-danger far fa-trash-alt"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer rounded-0 text-center text-secondary">
+        Total Rooms: {{ roomService.rooms?.length }}
+      </div>
+    </div>
+  </div>
+</div>
