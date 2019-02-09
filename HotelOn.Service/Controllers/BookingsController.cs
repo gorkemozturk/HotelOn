@@ -61,7 +61,11 @@ namespace HotelOn.Service.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(booking).State = EntityState.Modified;
+            var existingBooking = await _context.Bookings.FindAsync(id);
+            var room = await _context.Rooms.FindAsync(existingBooking.RoomID);
+
+            existingBooking.IsActive = !existingBooking.IsActive;
+            room.IsAvailable = !room.IsAvailable;
 
             try
             {

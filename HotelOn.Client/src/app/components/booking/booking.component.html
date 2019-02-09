@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let booking of bookingService.bookings">
+        <tr *ngFor="let booking of bookingService.bookings" [ngClass]="setClass(booking)">
           <td class="align-middle">{{ booking.bookingName }}</td>
           <td class="align-middle">{{ booking.room.roomNumber }}</td>
           <td class="align-middle">{{ booking.duration }} Days</td>
@@ -38,7 +38,8 @@
           </td>
           <td class="align-middle">{{ booking.createdAt | date }}</td>
           <td class="text-right">
-            <i style="cursor: pointer" class="text-success fas fa-check-circle mr-2"></i>
+            <i *ngIf="booking.isActive" style="cursor: pointer" (click)="onToggle(booking)" class="text-danger fas fa-times-circle mr-2"></i>
+            <i *ngIf="!booking.isActive" style="cursor: pointer" (click)="onToggle(booking)" class="text-success fas fa-check-circle mr-2"></i>
             <i style="cursor: pointer" (click)="openPaymentDialog(booking.id)" class="text-primary fas fa-dollar-sign mr-2"></i>
             <i style="cursor: pointer" (click)="onDelete(booking.id)" class="text-danger far fa-trash-alt"></i>
           </td>

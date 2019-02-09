@@ -25,7 +25,7 @@ namespace HotelOn.Service.Controllers
         [HttpGet]
         public IEnumerable<Room> GetRooms()
         {
-            return _context.Rooms.Include(r => r.RoomType);
+            return _context.Rooms.Include(r => r.RoomType).OrderBy(r => r.RoomNumber);
         }
 
         // GET: api/Rooms/5

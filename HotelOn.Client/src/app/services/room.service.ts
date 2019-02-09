@@ -9,6 +9,7 @@ import { Room } from '../models/room';
 export class RoomService {
   private readonly typeUrl = 'https://localhost:44316/api/roomtypes/';
   private readonly roomUrl = 'https://localhost:44316/api/rooms/';
+  private readonly availableRoomsRoomUrl = 'https://localhost:44316/api/availablerooms/';
 
   roomTypes: RoomType[];
   rooms: Room[];
@@ -29,6 +30,10 @@ export class RoomService {
 
   GetRooms() {
     return this.http.get(this.roomUrl).toPromise().then(res => this.rooms = res as Room[]);
+  }
+
+  GetAvailableRooms() {
+    return this.http.get(this.availableRoomsRoomUrl).toPromise().then(res => this.rooms = res as Room[]);
   }
 
   PostRoom(room: Room) {

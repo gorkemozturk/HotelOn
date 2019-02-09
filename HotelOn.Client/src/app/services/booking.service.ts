@@ -23,4 +23,8 @@ export class BookingService {
   DeleteBooking(id: number) {
     return this.http.delete(this.url + id);
   }
+
+  PutBooking(booking: Booking) {
+    return this.http.put(this.url + booking.id, booking);
+  }
 }

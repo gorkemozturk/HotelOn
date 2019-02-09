@@ -28,7 +28,7 @@ export class CreateBookingComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.roomService.GetRooms();
+    this.roomService.GetAvailableRooms();
     this.optionService.GetPaymentOptions().subscribe((res: PaymentOption[]) => this.paymentOptions = res);
   }
 

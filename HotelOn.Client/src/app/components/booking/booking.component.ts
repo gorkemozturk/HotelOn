@@ -5,6 +5,7 @@ import { BookingService } from 'src/app/services/booking.service';
 import { ToastrService } from 'ngx-toastr';
 import { PaymentComponent } from '../payment/payment.component';
 import { PaymentService } from 'src/app/services/payment.service';
+import { Booking } from 'src/app/models/booking';
 
 @Component({
   selector: 'app-booking',
@@ -56,6 +57,33 @@ export class BookingComponent implements OnInit {
     dialogConfig.width = '450px';
 
     this.dialog.open(PaymentComponent, dialogConfig);
+  }
+
+  onToggle(booking: Booking): void {
+    if (confirm('Are you sure to continue your process?')) {
+      this.bookingService.PutBooking(booking).subscribe(
+        (res: Booking) => {
+          booking.isActive = !booking.isActive;
+          if (booking.isActive == true) {
+            this.toastr.success('You have been confirmed the booking successfully.', 'Successfully');
+          } else {
+            this.toastr.success('You hava been revoked the booking successfully.', 'Successfully');
+          }
+        },
+        err => {
+          console.log(err);
+          alert(err);
+        }
+      );
+    }
+  }
+
+  setClass(booking: Booking) {
+    let cl = {
+      'table-success': booking.isActive
+    }
+
+    return cl;
   }
 
 }
