@@ -9,11 +9,15 @@ namespace HotelOn.Service.Models
     public class Payment
     {
         public int ID { get; set; }
+        public int BookingID { get; set; }
         public double Amount { get; set; }
         public double RemainingAmount { get; set; }
         public bool IsDone { get; set; }
         public DateTime PaymentDay { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime CreatedAt { get; set; }
+
+        [ForeignKey("BookingID")]
+        public virtual Booking Booking { get; set; }
     }
 }

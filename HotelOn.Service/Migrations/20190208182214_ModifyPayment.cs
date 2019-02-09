@@ -2,24 +2,9 @@
 
 namespace HotelOn.Service.Migrations
 {
-    public partial class ModifyPayments : Migration
+    public partial class ModifyPayment : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Payments_Bookings_BookingID",
-                table: "Payments");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Payments_BookingID",
-                table: "Payments");
-
-            migrationBuilder.DropColumn(
-                name: "BookingID",
-                table: "Payments");
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
                 name: "BookingID",
@@ -39,6 +24,21 @@ namespace HotelOn.Service.Migrations
                 principalTable: "Bookings",
                 principalColumn: "ID",
                 onDelete: ReferentialAction.Cascade);
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Payments_Bookings_BookingID",
+                table: "Payments");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Payments_BookingID",
+                table: "Payments");
+
+            migrationBuilder.DropColumn(
+                name: "BookingID",
+                table: "Payments");
         }
     }
 }

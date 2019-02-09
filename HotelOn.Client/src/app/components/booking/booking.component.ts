@@ -3,6 +3,8 @@ import { CreateBookingComponent } from './create-booking/create-booking.componen
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { BookingService } from 'src/app/services/booking.service';
 import { ToastrService } from 'ngx-toastr';
+import { PaymentComponent } from '../payment/payment.component';
+import { PaymentService } from 'src/app/services/payment.service';
 
 @Component({
   selector: 'app-booking',
@@ -11,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class BookingComponent implements OnInit {
   title: string = 'BOOKINGS';
-  constructor(private bookingService: BookingService, private dialog: MatDialog, private toastr: ToastrService) { }
+  constructor(private paymentService: PaymentService, private bookingService: BookingService, private dialog: MatDialog, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.bookingService.GetBookings();
@@ -41,6 +43,19 @@ export class BookingComponent implements OnInit {
         }
       );
     }
+  }
+
+  openPaymentDialog(id: number): void {
+    this.paymentService.GetPayments(id);
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = false;
+    dialogConfig.panelClass = 'customized-dialog';
+    dialogConfig.width = '450px';
+
+    this.dialog.open(PaymentComponent, dialogConfig);
   }
 
 }

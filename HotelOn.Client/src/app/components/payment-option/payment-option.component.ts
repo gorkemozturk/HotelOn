@@ -44,7 +44,7 @@ export class PaymentOptionComponent implements OnInit {
       this.optionService.DeletePaymentOption(id).subscribe(
         res => {
           const index = this.paymentOptions.indexOf(option);
-          this.paymentOptions.splice(index, 1); 
+          this.paymentOptions.splice(index, 1);
           this.toastr.warning('You have been deleted the payment option successfully.', 'Successfully');
         },
         err => {

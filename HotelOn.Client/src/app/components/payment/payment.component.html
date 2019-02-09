@@ -1,0 +1,42 @@
+<div class="card bg-light rounded-0 border-0">
+  <div class="card-header text-center rounded-0">
+    {{ title }}
+  </div>
+  <div class="card-body rounded-0 p-0" *ngIf="paymentService.payments?.length">
+    <table class="table table-striped table-borderless m-0">
+      <thead>
+        <tr>
+          <th scope="col">Payment Day</th>
+          <th scope="col">Amount</th>
+          <th scope="col">R. Amount</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of paymentService.payments" [ngClass]="setClass(payment)">
+          <td class="align-middle">{{ payment.paymentDay | date: 'dd.MM.yyyy' }}</td>
+          <td class="align-middle">{{ payment.amount | currency }}</td>
+          <td class="align-middle">{{ payment.remainingAmount | currency }}</td>
+          <td class="align-middle">
+            <span class="badge badge-primary rounded-0" *ngIf="payment.isDone">Paid</span>
+            <span class="badge badge-warning rounded-0" *ngIf="!payment.isDone">Unpaid</span>
+          </td>
+          <td class="align-middle" class="text-right">
+            <i *ngIf="payment.isDone" style="cursor: pointer" class="mr-2 fas fa-print"></i>
+            <i *ngIf="payment.isDone" (click)="onToggle(payment)" style="cursor: pointer" class="text-danger fas fa-credit-card"></i>
+            <i *ngIf="!payment.isDone" (click)="onToggle(payment)" style="cursor: pointer" class="text-primary fas fa-credit-card"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-body rounded-0" *ngIf="!paymentService.payments?.length">
+    <div class="alert alert-primary m-0 rounded-0" role="alert">
+      There are no any resources to show here.
+    </div>
+  </div>
+  <div class="card-footer text-center text-secondary rounded-0">
+    Total Payments: {{ paymentService.payments?.length }}
+  </div>
+</div>

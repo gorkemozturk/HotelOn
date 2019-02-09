@@ -21,6 +21,8 @@ import { BookingComponent } from './components/booking/booking.component';
 import { PaymentOptionService } from './services/payment-option.service';
 import { BookingService } from './services/booking.service';
 import { CreateBookingComponent } from './components/booking/create-booking/create-booking.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { PaymentService } from './services/payment.service';
 
 const routes: Route[] = [
   {
@@ -53,6 +55,7 @@ const routes: Route[] = [
     PaymentOptionComponent,
     BookingComponent,
     CreateBookingComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,12 +69,14 @@ const routes: Route[] = [
   providers: [
     RoomService,
     PaymentOptionService,
-    BookingService
+    BookingService,
+    PaymentService
   ],
   entryComponents: [
     CreateRoomTypeComponent,
     CreateRoomComponent,
-    CreateBookingComponent
+    CreateBookingComponent,
+    PaymentComponent
   ],
   bootstrap: [AppComponent]
 })

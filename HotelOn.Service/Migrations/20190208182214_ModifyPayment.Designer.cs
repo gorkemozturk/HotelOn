@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelOn.Service.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190208172618_ModifyPayments")]
-    partial class ModifyPayments
+    [Migration("20190208182214_ModifyPayment")]
+    partial class ModifyPayment
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,6 +64,8 @@ namespace HotelOn.Service.Migrations
 
                     b.Property<double>("Amount");
 
+                    b.Property<int>("BookingID");
+
                     b.Property<DateTime>("CreatedAt");
 
                     b.Property<bool>("IsDone");
@@ -75,6 +77,8 @@ namespace HotelOn.Service.Migrations
                     b.Property<DateTime>("UpdatedAt");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("BookingID");
 
                     b.ToTable("Payments");
                 });
@@ -152,6 +156,14 @@ namespace HotelOn.Service.Migrations
                     b.HasOne("HotelOn.Service.Models.Room", "Room")
                         .WithMany()
                         .HasForeignKey("RoomID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HotelOn.Service.Models.Payment", b =>
+                {
+                    b.HasOne("HotelOn.Service.Models.Booking", "Booking")
+                        .WithMany()
+                        .HasForeignKey("BookingID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

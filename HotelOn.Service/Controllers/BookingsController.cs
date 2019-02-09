@@ -102,10 +102,17 @@ namespace HotelOn.Service.Controllers
 
             int counter = 0;
 
+            booking.Total = bookingTotal;
+            booking.IsActive = false;
+            booking.CreatedAt = DateTime.Now;
+
+            _context.Bookings.Add(booking);
+
             for (int i = 0; i < option.Index; i++)
             {
                 Payment payment = new Payment()
                 {
+                    BookingID = booking.ID,
                     Amount = amount,
                     RemainingAmount = remainingAmount - amount,
                     PaymentDay = DateTime.Now.AddDays(counter),
@@ -120,11 +127,6 @@ namespace HotelOn.Service.Controllers
                 _context.Payments.Add(payment);
             }
 
-            booking.Total = bookingTotal;
-            booking.IsActive = false;
-            booking.CreatedAt = DateTime.Now;
-
-            _context.Bookings.Add(booking);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetBooking", new { id = booking.ID }, booking);
