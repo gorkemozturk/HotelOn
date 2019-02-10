@@ -25,7 +25,7 @@ namespace HotelOn.Service.Controllers
         [HttpGet]
         public IEnumerable<Booking> GetBookings()
         {
-            return _context.Bookings.Include(b => b.Room).Include(b => b.PaymentOption);
+            return _context.Bookings.Include(b => b.Room).Include(b => b.PaymentOption).Include(b => b.Guests);
         }
 
         // GET: api/Bookings/5

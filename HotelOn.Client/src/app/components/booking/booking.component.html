@@ -28,7 +28,7 @@
           <td class="align-middle">{{ booking.bookingName }}</td>
           <td class="align-middle">{{ booking.room.roomNumber }}</td>
           <td class="align-middle">{{ booking.duration }} Days</td>
-          <td class="align-middle">{{ booking.capacity }} Guests</td>
+          <td class="align-middle">{{ booking.guests?.length }} / {{ booking.capacity }} Guests</td>
           <td class="align-middle">{{ booking.startOn | date }}</td>
           <td class="align-middle">{{ booking.total | currency }}</td>
           <td class="align-middle">{{ booking.paymentOption.name }}</td>

@@ -18,5 +18,6 @@ namespace HotelOn.Service.Data
         public DbSet<PaymentOption> PaymentOptions { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<Guest> Guests { get; set; }
     }
 }

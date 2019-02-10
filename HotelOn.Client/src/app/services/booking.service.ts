@@ -7,6 +7,7 @@ import { Booking } from '../models/booking';
 })
 export class BookingService {
   bookings: Booking[];
+  booking: Booking;
 
   private readonly url = 'https://localhost:44316/api/bookings/';
 
@@ -14,6 +15,10 @@ export class BookingService {
 
   GetBookings() {
     return this.http.get(this.url).toPromise().then(res => this.bookings = res as Booking[]);
+  }
+
+  GetBooking(id: number) {
+    return this.http.get(this.url + id).toPromise().then(res => this.booking = res as Booking);
   }
 
   PostBooking(booking: Booking) {

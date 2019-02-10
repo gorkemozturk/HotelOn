@@ -70,13 +70,13 @@ const routes: Route[] = [
     RoomService,
     PaymentOptionService,
     BookingService,
-    PaymentService
+    PaymentService,
   ],
   entryComponents: [
     CreateRoomTypeComponent,
     CreateRoomComponent,
     CreateBookingComponent,
-    PaymentComponent
+    PaymentComponent,
   ],
   bootstrap: [AppComponent]
 })
