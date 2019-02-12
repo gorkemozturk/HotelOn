@@ -13,11 +13,11 @@ namespace HotelOn.Service.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BookingID = table.Column<int>(nullable: false),
+                    BookingID = table.Column<int>(nullable: true),
                     FirstName = table.Column<string>(maxLength: 15, nullable: false),
                     LastName = table.Column<string>(maxLength: 15, nullable: false),
                     PhoneNumber = table.Column<string>(maxLength: 15, nullable: false),
-                    Email = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(maxLength: 35, nullable: true),
                     Address = table.Column<string>(maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -28,7 +28,7 @@ namespace HotelOn.Service.Migrations
                         column: x => x.BookingID,
                         principalTable: "Bookings",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

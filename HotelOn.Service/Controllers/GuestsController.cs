@@ -30,21 +30,21 @@ namespace HotelOn.Service.Controllers
 
         // GET: api/Guests/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetGuest([FromRoute] int id)
+        public async Task<IActionResult> GetGuests([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var guest = await _context.Guests.FindAsync(id);
+            var guests = await _context.Guests.Where(g => g.BookingID == id).ToListAsync();
 
-            if (guest == null)
+            if (guests == null)
             {
                 return NotFound();
             }
 
-            return Ok(guest);
+            return Ok(guests);
         }
 
         // PUT: api/Guests/5
@@ -83,13 +83,15 @@ namespace HotelOn.Service.Controllers
         }
 
         // POST: api/Guests
-        [HttpPost]
-        public async Task<IActionResult> PostGuest([FromBody] Guest guest)
+        [HttpPost("{id}")]
+        public async Task<IActionResult> PostGuest([FromRoute] int id, [FromBody] Guest guest)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            guest.BookingID = id;
 
             _context.Guests.Add(guest);
             await _context.SaveChangesAsync();

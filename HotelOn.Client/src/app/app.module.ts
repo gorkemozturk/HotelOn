@@ -23,6 +23,8 @@ import { BookingService } from './services/booking.service';
 import { CreateBookingComponent } from './components/booking/create-booking/create-booking.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { PaymentService } from './services/payment.service';
+import { CreateGuestComponent } from './components/guest/create-guest/create-guest.component';
+import { GuestComponent } from './components/guest/guest.component';
 
 const routes: Route[] = [
   {
@@ -56,6 +58,8 @@ const routes: Route[] = [
     BookingComponent,
     CreateBookingComponent,
     PaymentComponent,
+    CreateGuestComponent,
+    GuestComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +81,8 @@ const routes: Route[] = [
     CreateRoomComponent,
     CreateBookingComponent,
     PaymentComponent,
+    CreateGuestComponent,
+    GuestComponent
   ],
   bootstrap: [AppComponent]
 })

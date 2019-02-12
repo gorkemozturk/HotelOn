@@ -37,6 +37,5 @@ namespace HotelOn.Service.Models
 
         [ForeignKey("PaymentOptionID")]
         public virtual PaymentOption PaymentOption { get; set; }
-        public virtual IEnumerable<Guest> Guests { get; set; }
     }
 }

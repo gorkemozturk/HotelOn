@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelOn.Service.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190209172017_CreateGuests")]
+    [Migration("20190212122013_CreateGuests")]
     partial class CreateGuests
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,9 +66,10 @@ namespace HotelOn.Service.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.Property<int>("BookingID");
+                    b.Property<int?>("BookingID");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .HasMaxLength(35);
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -195,9 +196,8 @@ namespace HotelOn.Service.Migrations
             modelBuilder.Entity("HotelOn.Service.Models.Guest", b =>
                 {
                     b.HasOne("HotelOn.Service.Models.Booking", "Booking")
-                        .WithMany()
-                        .HasForeignKey("BookingID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("Guests")
+                        .HasForeignKey("BookingID");
                 });
 
             modelBuilder.Entity("HotelOn.Service.Models.Payment", b =>

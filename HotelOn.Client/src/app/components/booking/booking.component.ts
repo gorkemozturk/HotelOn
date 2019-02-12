@@ -6,6 +6,10 @@ import { ToastrService } from 'ngx-toastr';
 import { PaymentComponent } from '../payment/payment.component';
 import { PaymentService } from 'src/app/services/payment.service';
 import { Booking } from 'src/app/models/booking';
+import { CreateGuestComponent } from '../guest/create-guest/create-guest.component';
+import { GuestComponent } from '../guest/guest.component';
+import { GuestService } from 'src/app/services/guest.service';
+import { Guest } from 'src/app/models/guest';
 
 @Component({
   selector: 'app-booking',
@@ -14,7 +18,8 @@ import { Booking } from 'src/app/models/booking';
 })
 export class BookingComponent implements OnInit {
   title: string = 'BOOKINGS';
-  constructor(private paymentService: PaymentService, private bookingService: BookingService, private dialog: MatDialog, private toastr: ToastrService) { }
+
+  constructor(private paymentService: PaymentService, private bookingService: BookingService, private dialog: MatDialog, private toastr: ToastrService, private guestService: GuestService) { }
 
   ngOnInit() {
     this.bookingService.GetBookings();
@@ -57,6 +62,32 @@ export class BookingComponent implements OnInit {
     dialogConfig.width = '450px';
 
     this.dialog.open(PaymentComponent, dialogConfig);
+  }
+
+  openRegistrationGuestDialog(id: number): void {
+    this.bookingService.GetBooking(id);
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = false;
+    dialogConfig.panelClass = 'customized-dialog';
+    dialogConfig.width = '450px';
+
+    this.dialog.open(CreateGuestComponent, dialogConfig);
+  }
+
+  openGuestDialog(id: number): void {
+    this.guestService.GetGuests(id);
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = false;
+    dialogConfig.panelClass = 'customized-dialog';
+    dialogConfig.width = '450px';
+
+    this.dialog.open(GuestComponent, dialogConfig);
   }
 
   onToggle(booking: Booking): void {

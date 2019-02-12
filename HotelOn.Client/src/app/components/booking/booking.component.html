@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="card-body rounded-0 p-0" *ngIf="bookingService.bookings?.length">
-    <table class="table table-striped table-borderless">
+    <table class="table table-striped table-borderless m-0">
       <thead>
         <tr>
           <th scope="col">Booking Name</th>
@@ -28,7 +28,7 @@
           <td class="align-middle">{{ booking.bookingName }}</td>
           <td class="align-middle">{{ booking.room.roomNumber }}</td>
           <td class="align-middle">{{ booking.duration }} Days</td>
-          <td class="align-middle">{{ booking.guests?.length }} / {{ booking.capacity }} Guests</td>
+          <td class="align-middle">{{ booking.capacity }} Guests <i class="text-primary fas fa-plus-circle ml-2" style="cursor: pointer" (click)="openRegistrationGuestDialog(booking.id)"></i></td>
           <td class="align-middle">{{ booking.startOn | date }}</td>
           <td class="align-middle">{{ booking.total | currency }}</td>
           <td class="align-middle">{{ booking.paymentOption.name }}</td>
@@ -40,6 +40,7 @@
           <td class="text-right">
             <i *ngIf="booking.isActive" style="cursor: pointer" (click)="onToggle(booking)" class="text-danger fas fa-times-circle mr-2"></i>
             <i *ngIf="!booking.isActive" style="cursor: pointer" (click)="onToggle(booking)" class="text-success fas fa-check-circle mr-2"></i>
+            <i class="text-secondary fas fa-users mr-2" style="cursor: pointer" (click)="openGuestDialog(booking.id)"></i>
             <i style="cursor: pointer" (click)="openPaymentDialog(booking.id)" class="text-primary fas fa-dollar-sign mr-2"></i>
             <i style="cursor: pointer" (click)="onDelete(booking.id)" class="text-danger far fa-trash-alt"></i>
           </td>

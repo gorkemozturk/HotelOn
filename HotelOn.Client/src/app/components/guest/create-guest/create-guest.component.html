@@ -1,0 +1,68 @@
+<div class="card bg-light rounded-0 border-0">
+  <div class="card-header text-center rounded-0">
+    {{ title }}
+  </div>
+  <div class="card-body rounded-0">
+    <form [formGroup]="form" autocomplete="off">
+      <div class="form-group row">
+        <div class="col">
+          <input 
+          class="form-control rounded-0" 
+          [class.is-invalid]="form.get('firstName').invalid && form.get('firstName').touched"
+          [class.is-valid]="form.get('firstName').valid"
+          formControlName="firstName" placeholder="First Name">
+          <div *ngIf="form.get('firstName').errors?.maxlength" class="invalid-feedback">
+            The first name field must be 15 characters at most.
+          </div>
+        </div>
+        <div class="col">
+          <input 
+          class="form-control rounded-0" 
+          [class.is-invalid]="form.get('lastName').invalid && form.get('lastName').touched"
+          [class.is-valid]="form.get('lastName').valid"
+          formControlName="lastName" placeholder="Last Name">
+          <div *ngIf="form.get('lastName').errors?.maxlength" class="invalid-feedback">
+            The last name field must be 15 characters at most.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input 
+        class="form-control rounded-0" 
+        [class.is-invalid]="form.get('email').invalid && form.get('email').touched"
+        [class.is-valid]="form.get('email').valid"
+        formControlName="email" placeholder="E-Mail">
+        <div *ngIf="form.get('email').errors?.email" class="invalid-feedback">
+          The e-mail field must be e-mail format.
+        </div>
+        <div *ngIf="form.get('email').errors?.maxlength" class="invalid-feedback">
+          The e-mail field must be 35 characters at most.
+        </div>
+      </div>
+      <div class="form-group">
+        <input 
+        class="form-control rounded-0" 
+        [class.is-invalid]="form.get('phoneNumber').invalid && form.get('phoneNumber').touched"
+        [class.is-valid]="form.get('phoneNumber').valid"
+        formControlName="phoneNumber" placeholder="Phone Number">
+        <div *ngIf="form.get('phoneNumber').errors?.pattern" class="invalid-feedback">
+          The phone number field must be numeric and 15 characters at most.
+        </div>
+      </div>
+      <div class="form-group">
+        <input 
+        class="form-control rounded-0" 
+        [class.is-invalid]="form.get('address').invalid && form.get('address').touched"
+        [class.is-valid]="form.get('address').valid"
+        formControlName="address" placeholder="Address">
+        <div *ngIf="form.get('address').errors?.maxlength" class="invalid-feedback">
+          The address field must be 100 characters at most.
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card-footer text-right rounded-0">
+    <button class="btn btn-sm btn-secondary rounded-0" (click)="reset(form)">Reset</button>
+    <button class="btn btn-sm btn-primary rounded-0 ml-1" [disabled]="!form.valid" (click)="onSubmit(bookingService.booking?.id, form)">Submit</button>
+  </div>
+</div>
